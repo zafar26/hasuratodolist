@@ -1,25 +1,3 @@
-// const Username = () => {
-//   const { loading, error, data } = useQuery(gql`
-//     {
-//       me {
-//         username
-//       }
-//     }
-//   `);
-
-//   if (loading) return <Text>Loading...</Text>;
-//   if (error) return (
-//     <Text>Error! ${error.message}</Text>
-//   );
-//   if (!data || !data.user) return (
-//     <Text>Could not find user :(</Text>
-//   );
-
-//   return (
-//     <Text>Your username: {data.me.username}</Text>
-//   );
-// }
-
 import React, { useEffect } from "react";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import {
@@ -38,36 +16,10 @@ interface PostInterface {
   title: any;
   body: any;
 }
-interface DataInterference {
-  // id: int;
-  title: string;
-  body: string;
-}
-interface NewDataInterference {
-  title: string;
-}
+
 interface PostData {
   posts: PostInterface[];
 }
-
-// interface NewPostDetails {
-//   title: string;
-//   body: string;
-// }
-
-// mutation UpdateTodo($id: String!, $type: String!) {
-//     updateTodo(id: $id, type: $type) {
-//       id
-//       type
-//     }
-//   }  ;
-
-// const muatation = gql`
-//   ${myQuery}
-// `;
-// const mutation = gql`
-//   ${myQuery}
-// `;
 
 export default function Todo() {
   const [postData, onChangePostData] = React.useState([]);
@@ -89,24 +41,7 @@ export default function Todo() {
 
   if (data) console.log(data);
   if (error) console.log(error);
-  //  const { loading, data, error } = useQuery<PostData >(GET_POST)
 
-  //   let ADD_POST = `mutation MyMutation($body:String!, $title:String!) {
-  //   insert_posts_one(object: {body: $body, title: $title}) {
-  //     id
-  //   }
-  // }`;
-
-  // console.log(data, "REFETChed");
-  // if(data) console.log(data)
-  // if(error) console.log(error)
-  const addPosts = () => {
-    // const [addPost, { data, error }] = useMutation(query);
-    // addPost({
-    //   variables: { text },
-    //   refetchQueries: [{ query: GET_TODOS }],
-    // });
-  };
   const GET_POST = gql`
     query MyQuery {
       posts(limit: 10) {
@@ -121,7 +56,7 @@ export default function Todo() {
 
     if (error) reject(error);
     if ((data as any) && (data as any).posts[0]) {
-      console.log(data, "DATA");
+      // console.log(data, "DATA");
       resolve((data as any).posts);
     }
   });
@@ -132,48 +67,46 @@ export default function Todo() {
       .catch((e: any) => console.log(e));
   }, [getData]);
 
-  let array = [
-    {
-      id: 1,
-      title: "Card Title",
-      body: "Card Body",
-    },
-    {
-      id: 2,
-      title: "Card Title",
-      body: "Card Body",
-    },
-    {
-      id: 3,
-      title: "Card Title",
-      body: "Card Body",
-    },
-    {
-      id: 11,
-      title: "Card Title",
-      body: "Card Body",
-    },
-    {
-      id: 12,
-      title: "Card Title",
-      body: "Card Body",
-    },
-    {
-      id: 13,
-      title: "Card Title",
-      body: "Card Body",
-    },
-  ];
+  // let array = [
+  //   {
+  //     id: 1,
+  //     title: "Card Title",
+  //     body: "Card Body",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Card Title",
+  //     body: "Card Body",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Card Title",
+  //     body: "Card Body",
+  //   },
+  //   {
+  //     id: 11,
+  //     title: "Card Title",
+  //     body: "Card Body",
+  //   },
+  //   {
+  //     id: 12,
+  //     title: "Card Title",
+  //     body: "Card Body",
+  //   },
+  //   {
+  //     id: 13,
+  //     title: "Card Title",
+  //     body: "Card Body",
+  //   },
+  // ];
 
   const Card = (e: { title: string; body: string; id: number }) => (
     <Cards id={e.id} title={e.title} body={e.body} />
   );
   const renderCard = (d: {
     item: { title: string; id: number; body: string };
-  }) => {
-    console.log(d, "INTERFACE");
-    return <Card title={d.item.title} id={d.item.id} body={d.item.body} />;
-  };
+  }) => <Card title={d.item.title} id={d.item.id} body={d.item.body} />;
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -234,7 +167,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   input: {
-    // position: 'absolute',
     fontStyle: "normal",
     fontWeight: "300",
     fontSize: 18,
@@ -258,7 +190,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   savePostBtn: {
-    // padding:'5px 10px',
     width: "30%",
 
     shadowColor: "rgba(0, 0, 0, 0.25)",
@@ -268,7 +199,6 @@ const styles = StyleSheet.create({
   },
   addPost: {
     bottom: 0,
-    // top:0
   },
 
   cardsArea: {
@@ -276,7 +206,6 @@ const styles = StyleSheet.create({
     height: "70%",
     overflow: "scroll",
 
-    // bottom: "10",
     marginTop: 20,
     display: "flex",
     justifyContent: "center",

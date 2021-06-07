@@ -12,8 +12,11 @@ yarn
 For starting in development mode:
 
 ```
-yarn run dev
+yarn start
 ```
 
 after that
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:19006](http://localhost:19006) with your browser to see the result.
+
+if you want to dowload it then go to <br>
+[http://localhost:3000](http://localhost:3000) it will download the apk file.

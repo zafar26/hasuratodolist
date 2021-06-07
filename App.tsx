@@ -3,7 +3,6 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { ApolloProvider } from "@apollo/client";
 import client from "./client";
-import { gql, useQuery, useMutation } from "@apollo/client";
 import Todo from "./todo";
 
 export default function App() {

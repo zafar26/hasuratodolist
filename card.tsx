@@ -8,12 +8,7 @@ export default function Card(props: any) {
   const [title, onchangeTitle] = React.useState(props.title ? props.title : "");
   const [body, onchangeBody] = React.useState(props.body ? props.body : "");
   const [modalVisible, setModalVisible] = React.useState(false);
-  //  mutation UpdateTodo($id: String!, $type: String!) {
-  //     updateTodo(id: $id, type: $type) {
-  //       id
-  //       type
-  //     }
-  //   }  ;
+
   const GET_POSTS = gql`
     query MyQuery {
       posts(limit: 10) {
@@ -58,24 +53,22 @@ export default function Card(props: any) {
   if (deleteError || uploadError) console.log(deleteError, uploadError);
 
   return (
-    <View>
+    <View style={{ display: "flex" }}>
       <View style={styles.card}>
-        <View style={{ display: "flex" }}>
+        <View style={{ display: "flex", width: "180px" }}>
           <TextInput
             style={{ paddingLeft: 10, fontSize: 20 }}
             value={title}
             onChange={(e) => onchangeTitle((e as any).target.value)}
-            //   onFocus={(e) => console.log("FOCUUS")}
             multiline
             numberOfLines={modalVisible ? 2 : 1}
             keyboardAppearance="light"
-            allowFontScaling={true}
+            allowFontScaling={modalVisible}
           />
           <TextInput
             style={{ paddingLeft: 10, fontSize: 12 }}
             value={body}
             onChange={(e) => onchangeBody((e as any).target.value)}
-            //   onFocus={(e) => console.log("FOCUUS")}
             multiline
             numberOfLines={modalVisible ? 2 : 1}
             keyboardAppearance="light"
@@ -132,10 +125,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    // width: "80%",
     height: "100px",
     backgroundColor: "#EAE6E6",
-    // boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    shadowOffset: { width: 1, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
     borderRadius: 10,
   },
 });
